@@ -1,0 +1,3 @@
+[submodule "apl-values"]
+	path = apl-values
+	url = https://github.com/akamai-developers-bot/apl-values.git
