@@ -117,6 +117,13 @@ wait-for-it() {
 setup() {
     cd $workdir
 
+    if [[ ! -f key.txt ]]; then
+        false
+        msg "missing key.txt file"
+    fi
+
+    [[ -f .env.enc ]] && age -d -i key.txt .env.enc > .env
+
     set -a
     source .env
     set +a
@@ -126,13 +133,6 @@ setup() {
         config:linode-cli > $HOME/.config/linode-cli
         msg "configure linode-cli"
     fi
-
-    if [[ ! -f key.txt ]]; then
-        false
-        msg "missing key.txt file"
-    fi
-
-    [[ -f .env.enc ]] && age -d -i key.txt .env.enc > .env
 }
 
 config:linode-cli() {
